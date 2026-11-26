@@ -51,6 +51,16 @@ The Open Rail Data wiki (wiki.openraildata.com) sits behind a browser check that
   - The licence wording is aimed at commercial use. Research use and redistribution aren't addressed.
   - Bulk, firehose and historical data are offered "upon request".
   - **Verdict:** not a substitute for collecting TRUST ourselves. Useful for spot-checking. Worth asking about academic access to historical corridor data.
+  - **Our token** (free tier, checked via `/api/info` on 2026-11-26): namespace `gb-nr`, no entitlements (so no detailed mode), 14-day history, 10/min, 100/h, 1,000/day, 10,000/week. Refresh-token auth: `/api/get_access_token` issues a short-lived access token.
+  - **Token terms and how we comply:**
+
+    | Term | What we do |
+    |---|---|
+    | Personal, non-commercial use only | This is a personal portfolio project. |
+    | Token never shared or committed | `RTT_REFRESH_TOKEN` lives only in `.env`. |
+    | No bulk extraction or excessive polling | RTT is **not** a training-data source. Only small, hand-picked validation spot-checks (e.g. comparing a few services against HSP/TRUST), cached locally and kept well inside the rate limits. |
+    | Credit any public-facing app | If RTT data ever appears in the Streamlit demo or a published figure, credit Realtime Trains with a link to realtimetrains.co.uk. |
+    | Redistribution | Not granted, so RTT responses are never committed or published as data. |
 - **OpenTrainTimes:** no public developer API found. It is built on the same Network Rail open feeds.
 - **TransportAPI and similar commercial resellers:** derived from the same upstream feeds. Not used.
 
