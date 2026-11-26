@@ -1,0 +1,14 @@
+[
+  {
+    "header": {"msg_type": "0003", "source_dev_id": "", "user_id": "", "original_data_source": "SMART", "msg_queue_timestamp": "1795777140000", "source_system_id": "TRUST"},
+    "body": {"event_type": "ARRIVAL", "gbtt_timestamp": "1795777080000", "original_loc_stanox": "", "planned_timestamp": "1795777050000", "timetable_variation": "1", "original_loc_timestamp": "", "current_train_id": "", "delay_monitoring_point": "true", "next_report_run_time": "2", "reporting_stanox": "99001", "actual_timestamp": "1795777140000", "correction_ind": "false", "event_source": "AUTOMATIC", "train_file_address": null, "platform": " 4", "division_code": "00", "train_terminated": "false", "train_id": "000T00MA27", "offroute_ind": "false", "variation_status": "LATE", "train_service_code": "00000000", "toc_id": "00", "loc_stanox": "99001", "auto_expected": "true", "direction_ind": "UP", "route": "1", "planned_event_type": "ARRIVAL", "next_report_stanox": "99002", "line_ind": "F"}
+  },
+  {
+    "header": {"msg_type": "0003", "source_dev_id": "", "user_id": "", "original_data_source": "SMART", "msg_queue_timestamp": "1795777141000", "source_system_id": "TRUST"},
+    "body": {"event_type": "DEPARTURE", "gbtt_timestamp": "", "original_loc_stanox": "", "planned_timestamp": "1795777020000", "timetable_variation": "0", "original_loc_timestamp": "", "current_train_id": "", "delay_monitoring_point": "false", "next_report_run_time": "5", "reporting_stanox": "00000", "actual_timestamp": "1795777020000", "correction_ind": "false", "event_source": "AUTOMATIC", "train_file_address": null, "platform": "", "division_code": "00", "train_terminated": "false", "train_id": "000Z00MA27", "offroute_ind": "false", "variation_status": "ON TIME", "train_service_code": "00000000", "toc_id": "00", "loc_stanox": "88001", "auto_expected": "true", "direction_ind": "DOWN", "route": "0", "planned_event_type": "DEPARTURE", "next_report_stanox": "88002", "line_ind": ""}
+  },
+  {
+    "header": {"msg_type": "0001", "source_dev_id": "", "user_id": "", "original_data_source": "TSIA", "msg_queue_timestamp": "1795777142000", "source_system_id": "TRUST"},
+    "body": {"schedule_source": "C", "train_file_address": null, "schedule_end_date": "2026-12-12", "train_id": "000Y00MA27", "tp_origin_timestamp": "2026-11-27", "creation_timestamp": "1795777142000", "tp_origin_stanox": "", "origin_dep_timestamp": "1795780000000", "train_service_code": "00000000", "toc_id": "00", "d1266_record_number": "00000", "train_call_type": "AUTOMATIC", "train_uid": "Z00000", "train_call_mode": "NORMAL", "schedule_type": "O", "sched_origin_stanox": "77001", "schedule_wtt_id": "0Y00M", "schedule_start_date": "2026-05-17"}
+  }
+]
