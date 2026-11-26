@@ -2,7 +2,7 @@
 
 Modelling how delays propagate on the Great Western Main Line (Reading to Paddington) across GWR, Elizabeth line and freight services, using Darwin HSP and Network Rail TRUST data with graph neural networks.
 
-> **Status:** early setup. The feed collector and reference-data tooling are in place. No results yet. See [PROJECT_BRIEF.md](PROJECT_BRIEF.md) for the research questions and plan.
+> **Status:** early setup. The feed collector and reference-data tooling are in place. No results yet.
 
 ## Research questions
 
