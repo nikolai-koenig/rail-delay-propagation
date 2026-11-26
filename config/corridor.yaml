@@ -1,0 +1,76 @@
+# GWML corridor: Reading to London Paddington.
+#
+# Roles:
+#   station   - passenger station on the corridor (resolved by CRS code)
+#   junction  - non-station location (junction / timing point); TIPLOCs must be
+#               listed by hand after reviewing `rdp corridor resolve` candidates
+#   entry     - boundary where trains enter the modelled graph (e.g. Heathrow)
+#   exit      - boundary where trains leave the graph (e.g. Paddington low level)
+#
+# `exclude_tiplocs` removes TIPLOCs that share a CRS but are not part of the
+# node (e.g. sidings). Ordering of the London approach (Old Oak Common to
+# Paddington) is provisional and will be checked against real CIF and TRUST
+# location sequences.
+version: 1
+
+nodes:
+  - {id: RDG, name: Reading, role: station, crs: RDG}
+  - {id: TWY, name: Twyford, role: station, crs: TWY, notes: Henley branch junction}
+  - {id: MAI, name: Maidenhead, role: station, crs: MAI, notes: Marlow branch junction}
+  - {id: TAP, name: Taplow, role: station, crs: TAP}
+  - {id: BNM, name: Burnham, role: station, crs: BNM}
+  - {id: SLO, name: Slough, role: station, crs: SLO, notes: Windsor branch junction}
+  - {id: LNY, name: Langley, role: station, crs: LNY}
+  - {id: IVR, name: Iver, role: station, crs: IVR}
+  - {id: WDT, name: West Drayton, role: station, crs: WDT, notes: Colnbrook freight branch}
+  - id: AIRPORT_JN
+    name: Airport Junction
+    role: junction
+    search: [AIRPORT JN, AIRPORT JUNCTION]
+    notes: Heathrow branch diverges; Heathrow Express shares track east of here
+  - {id: HAY, name: Hayes & Harlington, role: station, crs: HAY}
+  - {id: STL, name: Southall, role: station, crs: STL, notes: Brentford freight branch}
+  - {id: HAN, name: Hanwell, role: station, crs: HAN}
+  - {id: WEA, name: West Ealing, role: station, crs: WEA, notes: Greenford branch}
+  - {id: EAL, name: Ealing Broadway, role: station, crs: EAL}
+  - {id: AML, name: Acton Main Line, role: station, crs: AML, notes: Acton yard / freight}
+  - id: OLD_OAK
+    name: Old Oak Common
+    role: junction
+    search: [OLD OAK]
+  - id: LADBROKE_GROVE
+    name: Ladbroke Grove
+    role: junction
+    search: [LADBROKE]
+  - id: PORTOBELLO_JN
+    name: Portobello Junction
+    role: junction
+    search: [PORTOBELLO]
+    notes: Elizabeth line tracks leave the GWML towards the Royal Oak portal
+  - id: WESTBOURNE_PARK
+    name: Westbourne Park
+    role: junction
+    search: [WESTBOURNE]
+  - id: PAD
+    name: London Paddington (high level)
+    role: station
+    crs: PAD
+    notes: >-
+      Low-level (Elizabeth line) TIPLOCs may share the PAD CRS; move them to
+      PAD_LL via exclude_tiplocs / tiplocs after review.
+  - id: PAD_LL
+    name: London Paddington (Elizabeth line, low level)
+    role: exit
+    search: [PADDINGTON]
+  - id: HXX
+    name: Heathrow Terminals 2 & 3
+    role: entry
+    crs: HXX
+    notes: Heathrow branch entry; T4 (HAF) and T5 (HWV) are outside the graph
+
+main_line: [RDG, TWY, MAI, TAP, BNM, SLO, LNY, IVR, WDT, AIRPORT_JN, HAY, STL, HAN, WEA, EAL,
+            AML, OLD_OAK, LADBROKE_GROVE, PORTOBELLO_JN, WESTBOURNE_PARK, PAD]
+
+branches:
+  heathrow: [HXX, AIRPORT_JN]
+  elizabeth_core: [PORTOBELLO_JN, PAD_LL]
