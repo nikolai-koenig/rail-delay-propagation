@@ -1,0 +1,17 @@
+# Oracle VPS (primary collector): TRUST via Rail Data Marketplace Kafka.
+[Unit]
+Description=rdp collector - TRUST via RDM Kafka
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/rail-delay-propagation
+ExecStart=%h/rail-delay-propagation/.venv/bin/rdp collect --source rdm-kafka --feed trust --filter all
+Restart=always
+RestartSec=30
+TimeoutStopSec=30
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target

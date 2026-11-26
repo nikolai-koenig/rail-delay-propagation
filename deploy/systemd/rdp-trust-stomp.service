@@ -1,0 +1,18 @@
+# Raspberry Pi (backup collector): TRUST via Network Rail Open Data STOMP.
+# Install as a user unit, see docs/collector.md.
+[Unit]
+Description=rdp collector - TRUST via Network Rail STOMP
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/rail-delay-propagation
+ExecStart=%h/rail-delay-propagation/.venv/bin/rdp collect --source nr-stomp --feed trust --filter all
+Restart=always
+RestartSec=30
+TimeoutStopSec=30
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target

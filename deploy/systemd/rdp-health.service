@@ -1,0 +1,7 @@
+[Unit]
+Description=rdp collector health check (pings HEALTHCHECK_URL when healthy)
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/rail-delay-propagation
+ExecStart=%h/rail-delay-propagation/.venv/bin/rdp health
