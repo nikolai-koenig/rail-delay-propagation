@@ -7,15 +7,18 @@ TRUST has no public historical archive (see [data-sources.md](data-sources.md)).
 | Host | Source | Feeds | Role |
 |---|---|---|---|
 | Oracle VPS | Rail Data Marketplace Kafka | TRUST, Darwin Push Port | primary |
-| Raspberry Pi | Network Rail Open Data STOMP | TRUST | backup |
+| Raspberry Pi | Rail Data Marketplace Kafka (same TRUST product) | TRUST | backup, **to be confirmed** |
 
-The two TRUST collectors use **different sources** for three reasons:
+The original plan put the Pi on Network Rail's own STOMP feed. That portal is full: registration was refused on 2026-11-26 (see [data-sources.md](data-sources.md)). The STOMP code stays in case a space opens.
 
-- An RDM Kafka product issues one consumer group. Two consumers in the same group would *split* the stream rather than each receive a full copy.
-- It avoids one account connecting from two places.
-- An outage of either platform is covered by the other.
+**Pi backup on RDM, to be confirmed when connected.** Both machines would join the product's single consumer group, and Kafka shares the topic's partitions between them:
 
-`rdp compact` merges both captures and de-duplicates them. It also reports how many messages only one collector saw, which measures each collector's gaps.
+- **One partition:** the Pi sits idle and takes over if the VPS stops (failover).
+- **Several partitions:** each machine captures part of the stream.
+
+Either way, `rdp compact` merges both captures and de-duplicates them, so the combined data is complete while at least one machine is up. Before relying on this, check the partition count and that RDM allows two simultaneous connections on one subscription. Otherwise, the Pi stays a cold standby.
+
+`rdp compact` also reports how many messages only one collector saw, which measures each collector's gaps.
 
 ## Guarantees and their limits
 
@@ -55,21 +58,20 @@ uv sync --locked --no-dev
 cp .env.example .env && chmod 600 .env && $EDITOR .env    # set RDP_HOST_TAG=pi or vps
 
 # 3. try it in the foreground first (Ctrl+C to stop)
-.venv/bin/rdp collect --source nr-stomp --feed trust     # Pi
-.venv/bin/rdp collect --source rdm-kafka --feed trust    # VPS
+.venv/bin/rdp collect --source rdm-kafka --feed trust
 
 # 4. install as user services that survive logout and reboot
 mkdir -p ~/.config/systemd/user
-cp deploy/systemd/rdp-trust-stomp.service deploy/systemd/rdp-health.* ~/.config/systemd/user/   # Pi
-cp deploy/systemd/rdp-trust-kafka.service deploy/systemd/rdp-darwin-kafka.service \
-   deploy/systemd/rdp-health.* ~/.config/systemd/user/                                       # VPS
+cp deploy/systemd/rdp-trust-kafka.service deploy/systemd/rdp-health.* ~/.config/systemd/user/
+cp deploy/systemd/rdp-darwin-kafka.service ~/.config/systemd/user/          # VPS only
 systemctl --user daemon-reload
-systemctl --user enable --now rdp-trust-stomp.service rdp-health.timer   # Pi (adjust names on VPS)
+systemctl --user enable --now rdp-trust-kafka.service rdp-health.timer
+systemctl --user enable --now rdp-darwin-kafka.service                      # VPS only
 sudo loginctl enable-linger "$USER"
 
 # 5. check
 systemctl --user status 'rdp-*'
-journalctl --user -u rdp-trust-stomp -f
+journalctl --user -u rdp-trust-kafka -f
 .venv/bin/rdp health
 ```
 
@@ -89,7 +91,8 @@ Copy the Pi's `raw/` tree into the VPS's (or both into one workstation) with `rs
 
 ## First-connection checklist (unverified details)
 
-- [ ] Network Rail STOMP host/port (`publicdatafeeds.networkrail.co.uk:61618`) and durable subscription headers accepted.
+- [ ] RDM TRUST topic partition count, and whether a second consumer (the Pi) in the same group is allowed.
+- [ ] Network Rail STOMP host/port and durable subscription headers (only if a Network Rail account ever becomes available).
 - [ ] RDM TRUST Kafka message format: is each Kafka message one JSON array (like STOMP) or one message? The handler accepts both; confirm in the raw files.
 - [ ] RDM Darwin topic format (JSON wrapper vs XML). Stored raw either way.
 - [ ] CORPUS download URL works with Network Rail credentials.

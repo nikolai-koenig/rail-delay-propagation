@@ -1,4 +1,4 @@
-# Oracle VPS (primary collector): TRUST via Rail Data Marketplace Kafka.
+# TRUST via Rail Data Marketplace Kafka. Used on the VPS (primary) and the Pi (backup).
 [Unit]
 Description=rdp collector - TRUST via RDM Kafka
 After=network-online.target

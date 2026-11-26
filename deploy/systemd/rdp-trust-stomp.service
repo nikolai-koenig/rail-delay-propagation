@@ -1,4 +1,5 @@
-# Raspberry Pi (backup collector): TRUST via Network Rail Open Data STOMP.
+# TRUST via Network Rail Open Data STOMP. Unused while that portal is full;
+# kept in case a space opens (see docs/data-sources.md).
 # Install as a user unit, see docs/collector.md.
 [Unit]
 Description=rdp collector - TRUST via Network Rail STOMP

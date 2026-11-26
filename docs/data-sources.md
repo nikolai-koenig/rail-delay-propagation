@@ -38,14 +38,26 @@ The Open Rail Data wiki (wiki.openraildata.com) sits behind a browser check that
 |---|---|---|
 | Historical archive | Confirmed | "There isn't a published official set of historical messages" (P. Hicks, Jun 2025). Options: your own collector, private archives, or an FOI request to Network Rail. ([thread](https://groups.google.com/g/openraildata-talk/c/PH0mtnyTCAM), [FOI experience](https://groups.google.com/g/openraildata-talk/c/1SW6ZAdkFTU)) |
 | Coverage | Confirmed | Covers all operators, including freight (topic `TRAIN_MVT_ALL_TOC`). Reports are at TRUST reporting points, not every timing point. |
-| Access route A | Community report | Network Rail Open Data at `publicdatafeeds.networkrail.co.uk`. STOMP on port 61618. Accounts are approved by hand (can take days); the platform is capped at 1,000 users. ([trackside docs](https://github.com/carbonarok/trackside)) |
-| Access route B | Community report | RDM product "NWR Train Movements" over Kafka (SASL_SSL). One consumer group per product. ZScaler or corporate VPNs have broken connections. ([thread](https://groups.google.com/g/openraildata-talk/c/EnZK7vzo_fs)) |
+| Access route A | Confirmed: closed to us | Network Rail Open Data at `publicdatafeeds.networkrail.co.uk` (STOMP, port 61618). Capped at 1,000 users. Registration on 2026-11-26 returned: "The system has reached the maximum allowed number of registered users. Spaces may become available at a later date." The STOMP source is kept in the code in case a space opens. |
+| Access route B (**used**) | Community report | RDM product "NWR Train Movements" over Kafka (SASL_SSL), with no user cap reported. An RDM team member, May 2025: "Pretty sure that we have all NROD feeds on RDM" ([thread](https://groups.google.com/g/openraildata-talk/c/QELX0MktPEg); see also the [user cap discussion](https://www.railforums.co.uk/threads/network-rail-data-feeds-max-users.309434/)). One consumer group per product. ZScaler or corporate VPNs have broken connections. ([thread](https://groups.google.com/g/openraildata-talk/c/EnZK7vzo_fs)) |
 | Licence | Confirmed | Open Government Licence (version not stated). No Network Rail branding; the project may not be called "official". No uptime guarantee. ([licence](https://www.networkrail.co.uk/who-we-are/transparency-and-ethics/transparency/open-data-feeds/network-rail-infrastructure-limited-data-feeds-licence/), [open data page](https://www.networkrail.co.uk/who-we-are/transparency-and-ethics/transparency/open-data-feeds/)) |
+
+## Third-party alternatives considered
+
+- **Realtime Trains, Next Generation API** (`data.rtt.io`; the old `api.rtt.io` is closed). Sources: [launch](https://blog.realtimetrains.com/2026/03/next-generation-api-now-available/), [plans](https://blog.realtimetrains.com/2026/07/paid-api-plans-are-now-available/).
+  - The free base limit is 10/min, 100/h, 1,000/day (since Oct 2026).
+  - History lookback is 31 days on the Team plan (£29/month) and 365 days on Professional (£99/month).
+  - Freight allocations are Enterprise-only and subject to operator permission.
+  - The licence wording is aimed at commercial use. Research use and redistribution aren't addressed.
+  - Bulk, firehose and historical data are offered "upon request".
+  - **Verdict:** not a substitute for collecting TRUST ourselves. Useful for spot-checking. Worth asking about academic access to historical corridor data.
+- **OpenTrainTimes:** no public developer API found. It is built on the same Network Rail open feeds.
+- **TransportAPI and similar commercial resellers:** derived from the same upstream feeds. Not used.
 
 ## SCHEDULE (CIF) and CORPUS
 
-- Both are available as Network Rail file downloads (authenticated) and as RDM file products.
-- The CORPUS download URL used in `rdp reference download-corpus` (`.../ntrod/SupportingFileAuthenticate?type=CORPUS`) comes from community docs. **To verify on first use.**
+- Both are available as RDM file products ("NWR Schedule", "NWR CORPUS"). They are also Network Rail downloads, but that portal is full (see above).
+- `rdp reference download-corpus` uses the Network Rail URL, so it is unusable for now. Download CORPUS from RDM's Data files tab and pass it with `rdp corridor resolve --corpus PATH`.
 - CIF contains engineering, pathing and performance allowances per location, which is the direct measure of timetable slack for RQ1.
 
 ## Context data
