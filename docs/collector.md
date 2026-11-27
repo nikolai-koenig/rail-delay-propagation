@@ -95,5 +95,6 @@ Copy the Pi's `raw/` tree into the VPS's (or both into one workstation) with `rs
 - [ ] Network Rail STOMP host/port and durable subscription headers (only if a Network Rail account ever becomes available).
 - [ ] RDM TRUST Kafka message format: is each Kafka message one JSON array (like STOMP) or one message? The handler accepts both; confirm in the raw files.
 - [ ] RDM Darwin topic format (JSON wrapper vs XML). Stored raw either way.
-- [ ] CORPUS download URL works with Network Rail credentials.
+- [x] CORPUS obtained (RDM weekly XML) and corridor resolved, 2026-11-27.
+- [ ] Every corridor STANOX in `config/corridor_codes.json` appears in the first day of TRUST; add or remove junction TIPLOCs if not.
 - [ ] Measured compressed volume per feed per day → decide on filtering.

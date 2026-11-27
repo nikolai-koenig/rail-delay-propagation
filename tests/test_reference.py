@@ -6,7 +6,7 @@ import json
 import pytest
 
 from rdp.config import CONFIG_DIR
-from rdp.reference.corpus import load_corpus
+from rdp.reference.corpus import find_latest_corpus, load_corpus
 from rdp.reference.corridor import (
     load_corridor,
     resolve_corridor,
@@ -120,3 +120,57 @@ def test_real_corridor_config_is_valid():
     assert corridor.main_line[0] == "RDG" and corridor.main_line[-1] == "PAD"
     assert "AIRPORT_JN" in corridor.main_line
     assert corridor.branches["heathrow"] == ["HXX", "AIRPORT_JN"]
+
+
+# Same synthetic rows in the RDM weekly XML format (namespaced, blanks as " ",
+# optional elements omitted when empty).
+CORPUS_XML = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:TSDBData xmlns:ns2="http://tempuri.org/XMLSchema.xsd">
+{items}
+</ns2:TSDBData>
+"""
+XML_ITEM = """  <ns2:TSDBDataItem>
+    <ns2:NLCTiplocCode>{tiploc}</ns2:NLCTiplocCode>
+    <ns2:NLCLocationCode>{nlc}</ns2:NLCLocationCode>
+    <ns2:NLCDescription>{desc}</ns2:NLCDescription>
+    <ns2:NLCCapriDesc> </ns2:NLCCapriDesc>
+    {crs}{stanox}<ns2:NLCPoMcpCode>0</ns2:NLCPoMcpCode>
+  </ns2:TSDBDataItem>"""
+
+
+def _xml_item(rec: dict) -> str:
+    crs = rec["3ALPHA"].strip()
+    stanox = rec["STANOX"].strip()
+    return XML_ITEM.format(
+        tiploc=rec["TIPLOC"],
+        nlc=f"{rec['NLC']:06d}",
+        desc=rec["NLCDESC"].replace("&", "&amp;"),
+        crs=f"<ns2:NLCCrsCode>{crs}</ns2:NLCCrsCode>" if crs else "",
+        stanox=f"<ns2:NLCStanoxCode>{stanox}</ns2:NLCStanoxCode>" if stanox else "",
+    )
+
+
+def test_load_corpus_rdm_xml_matches_json(tmp_path, corpus):
+    path = tmp_path / "NLC20990101.xml.gz"
+    items = "\n".join(_xml_item(r) for r in CORPUS["TIPLOCDATA"])
+    path.write_bytes(gzip.compress(CORPUS_XML.format(items=items).encode()))
+    xml = load_corpus(path)
+    cols = ["tiploc", "stanox", "crs", "desc"]
+    assert xml[cols].equals(corpus[cols])
+    assert xml.desc16.isna().all() and xml.uic.isna().all()
+
+
+def test_load_corpus_rejects_empty_xml(tmp_path):
+    path = tmp_path / "NLC20990101.xml"
+    path.write_text(CORPUS_XML.format(items=""))
+    with pytest.raises(ValueError):
+        load_corpus(path)
+
+
+def test_find_latest_corpus(tmp_path):
+    assert find_latest_corpus(tmp_path) is None
+    (tmp_path / "CORPUSExtract.json.gz").write_bytes(b"")
+    assert find_latest_corpus(tmp_path).name == "CORPUSExtract.json.gz"
+    for name in ["NLC20261113.xml.gz", "NLC20261120.xml.gz"]:
+        (tmp_path / name).write_bytes(b"")
+    assert find_latest_corpus(tmp_path).name == "NLC20261120.xml.gz"

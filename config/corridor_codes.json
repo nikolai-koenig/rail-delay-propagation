@@ -1,0 +1,376 @@
+{
+  "nodes": [
+    {
+      "id": "RDG",
+      "name": "Reading",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "RDNGSTN",
+          "stanox": "74237",
+          "crs": "RDG",
+          "desc": "READING",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "TWY",
+      "name": "Twyford",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "TWYFORD",
+          "stanox": "74023",
+          "crs": "TWY",
+          "desc": "TWYFORD",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "MAI",
+      "name": "Maidenhead",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "MDNHEAD",
+          "stanox": "74005",
+          "crs": "MAI",
+          "desc": "MAIDENHEAD",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "TAP",
+      "name": "Taplow",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "TAPLOW",
+          "stanox": "74001",
+          "crs": "TAP",
+          "desc": "TAPLOW",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "BNM",
+      "name": "Burnham",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "BNHAM",
+          "stanox": "73996",
+          "crs": "BNM",
+          "desc": "BURNHAM",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "SLO",
+      "name": "Slough",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "SLOUGH",
+          "stanox": "73822",
+          "crs": "SLO",
+          "desc": "SLOUGH",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "LNY",
+      "name": "Langley",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "LANGLEY",
+          "stanox": "73816",
+          "crs": "LNY",
+          "desc": "LANGLEY",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "IVR",
+      "name": "Iver",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "IVER",
+          "stanox": "73810",
+          "crs": "IVR",
+          "desc": "IVER",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "WDT",
+      "name": "West Drayton",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "WDRYTON",
+          "stanox": "73780",
+          "crs": "WDT",
+          "desc": "WEST DRAYTON",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "AIRPORT_JN",
+      "name": "Airport Junction",
+      "role": "junction",
+      "codes": [
+        {
+          "tiploc": "HTRWAJN",
+          "stanox": "73775",
+          "crs": null,
+          "desc": "HEATHROW AIRPORT JN",
+          "how": "manual"
+        }
+      ]
+    },
+    {
+      "id": "HAY",
+      "name": "Hayes & Harlington",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "HAYESAH",
+          "stanox": "73770",
+          "crs": "HAY",
+          "desc": "HAYES & HARLINGTON",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "STL",
+      "name": "Southall",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "STHALL",
+          "stanox": "73663",
+          "crs": "STL",
+          "desc": "SOUTHALL",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "HAN",
+      "name": "Hanwell",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "HANWELL",
+          "stanox": "73261",
+          "crs": "HAN",
+          "desc": "HANWELL",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "WEA",
+      "name": "West Ealing",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "WEALING",
+          "stanox": "73255",
+          "crs": "WEA",
+          "desc": "WEST EALING",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "EAL",
+      "name": "Ealing Broadway",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "EALINGB",
+          "stanox": "73253",
+          "crs": "EAL",
+          "desc": "EALING BROADWAY",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "AML",
+      "name": "Acton Main Line",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "ACTONML",
+          "stanox": "73240",
+          "crs": "AML",
+          "desc": "ACTON MAIN LINE",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "OLD_OAK",
+      "name": "Old Oak Common",
+      "role": "junction",
+      "codes": [
+        {
+          "tiploc": "OLDOKCE",
+          "stanox": "73226",
+          "crs": null,
+          "desc": "OLD OAK COMMON EAST",
+          "how": "manual"
+        },
+        {
+          "tiploc": "OLDOKCW",
+          "stanox": "73224",
+          "crs": null,
+          "desc": "OLD OAK COMMON WEST",
+          "how": "manual"
+        }
+      ]
+    },
+    {
+      "id": "LADBROKE_GROVE",
+      "name": "Ladbroke Grove",
+      "role": "junction",
+      "codes": [
+        {
+          "tiploc": "LDBRKJ",
+          "stanox": "73111",
+          "crs": null,
+          "desc": "LADBROKE GROVE",
+          "how": "manual"
+        }
+      ]
+    },
+    {
+      "id": "PORTOBELLO_JN",
+      "name": "Portobello Junction",
+      "role": "junction",
+      "codes": [
+        {
+          "tiploc": "PRTOBJP",
+          "stanox": "73106",
+          "crs": null,
+          "desc": "PORTOBELLO JN (LONDON)",
+          "how": "manual"
+        }
+      ]
+    },
+    {
+      "id": "PAD",
+      "name": "London Paddington (high level)",
+      "role": "station",
+      "codes": [
+        {
+          "tiploc": "PADTON",
+          "stanox": "73000",
+          "crs": "PAD",
+          "desc": "LONDON PADDINGTON",
+          "how": "crs"
+        }
+      ]
+    },
+    {
+      "id": "PAD_LL",
+      "name": "London Paddington (Elizabeth line, low level)",
+      "role": "exit",
+      "codes": [
+        {
+          "tiploc": "PADTLL",
+          "stanox": "73003",
+          "crs": "PDX",
+          "desc": "PADDINGTON CROSSRAIL",
+          "how": "manual"
+        }
+      ]
+    },
+    {
+      "id": "HXX",
+      "name": "Heathrow Terminals 2 & 3",
+      "role": "entry",
+      "codes": [
+        {
+          "tiploc": "HTRWAPT",
+          "stanox": "73778",
+          "crs": "HXX",
+          "desc": "HEATHROW TERMINALS 2 & 3",
+          "how": "crs"
+        }
+      ]
+    }
+  ],
+  "stanox": [
+    "73000",
+    "73003",
+    "73106",
+    "73111",
+    "73224",
+    "73226",
+    "73240",
+    "73253",
+    "73255",
+    "73261",
+    "73663",
+    "73770",
+    "73775",
+    "73778",
+    "73780",
+    "73810",
+    "73816",
+    "73822",
+    "73996",
+    "74001",
+    "74005",
+    "74023",
+    "74237"
+  ],
+  "tiploc": [
+    "ACTONML",
+    "BNHAM",
+    "EALINGB",
+    "HANWELL",
+    "HAYESAH",
+    "HTRWAJN",
+    "HTRWAPT",
+    "IVER",
+    "LANGLEY",
+    "LDBRKJ",
+    "MDNHEAD",
+    "OLDOKCE",
+    "OLDOKCW",
+    "PADTLL",
+    "PADTON",
+    "PRTOBJP",
+    "RDNGSTN",
+    "SLOUGH",
+    "STHALL",
+    "TAPLOW",
+    "TWYFORD",
+    "WDRYTON",
+    "WEALING"
+  ],
+  "unresolved": [],
+  "problems": [],
+  "provenance": {
+    "corpus_file": "NLC20261120.xml.gz",
+    "corpus_sha256": "062d4d8c425b92205093f5d7fa9936a1f6086b1f8aadcc7ed912f83b7317a2a0",
+    "corridor_config": "corridor.yaml"
+  }
+}

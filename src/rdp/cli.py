@@ -44,7 +44,7 @@ def cmd_download_corpus(args: argparse.Namespace) -> int:
 
 
 def cmd_corridor_resolve(args: argparse.Namespace) -> int:
-    from rdp.reference.corpus import load_corpus
+    from rdp.reference.corpus import find_latest_corpus, load_corpus
     from rdp.reference.corridor import (
         file_sha256,
         load_corridor,
@@ -52,10 +52,14 @@ def cmd_corridor_resolve(args: argparse.Namespace) -> int:
         search_candidates,
     )
 
-    corpus_path = args.corpus or config.data_dir() / DEFAULT_CORPUS
-    if not corpus_path.exists():
-        print(f"CORPUS not found at {corpus_path}; run `rdp reference download-corpus`.")
+    corpus_path = args.corpus or find_latest_corpus(config.data_dir() / "reference")
+    if corpus_path is None or not corpus_path.exists():
+        print(
+            "CORPUS not found. Download NLCYYYYMMDD.xml.gz from the RDM CORPUS product "
+            "into data/local/reference/, or pass --corpus PATH."
+        )
         return 2
+    log.info("using CORPUS %s", corpus_path)
     corpus = load_corpus(corpus_path)
     corridor = load_corridor(args.config)
     result = resolve_corridor(corridor, corpus)

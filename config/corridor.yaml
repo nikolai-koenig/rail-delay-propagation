@@ -26,8 +26,12 @@ nodes:
   - id: AIRPORT_JN
     name: Airport Junction
     role: junction
+    tiplocs: [HTRWAJN]
     search: [AIRPORT JN, AIRPORT JUNCTION]
-    notes: Heathrow branch diverges; Heathrow Express shares track east of here
+    notes: >-
+      Heathrow branch diverges; Heathrow Express shares track east of here.
+      Stockley Jn (STKYJN) and Stockley Bridge Jn (STKYBJN) are nearby; add
+      them if TRUST reports there rather than at HTRWAJN.
   - {id: HAY, name: Hayes & Harlington, role: station, crs: HAY}
   - {id: STL, name: Southall, role: station, crs: STL, notes: Brentford freight branch}
   - {id: HAN, name: Hanwell, role: station, crs: HAN}
@@ -37,31 +41,36 @@ nodes:
   - id: OLD_OAK
     name: Old Oak Common
     role: junction
+    tiplocs: [OLDOKCW, OLDOKCE]
     search: [OLD OAK]
+    notes: Main-line timing points only; depot and siding TIPLOCs excluded
   - id: LADBROKE_GROVE
     name: Ladbroke Grove
     role: junction
+    tiplocs: [LDBRKJ]
     search: [LADBROKE]
+    notes: >-
+      Stands in for Westbourne Park, which has no running-line timing point
+      in CORPUS (only GBRF and carriage-siding TIPLOCs)
   - id: PORTOBELLO_JN
     name: Portobello Junction
     role: junction
+    tiplocs: [PRTOBJP]
     search: [PORTOBELLO]
     notes: Elizabeth line tracks leave the GWML towards the Royal Oak portal
-  - id: WESTBOURNE_PARK
-    name: Westbourne Park
-    role: junction
-    search: [WESTBOURNE]
   - id: PAD
     name: London Paddington (high level)
     role: station
     crs: PAD
     notes: >-
-      Low-level (Elizabeth line) TIPLOCs may share the PAD CRS; move them to
-      PAD_LL via exclude_tiplocs / tiplocs after review.
+      CORPUS 2026-11-20: PADTON and LINKLIN (Link Line) share STANOX 73000.
+      The Elizabeth line low level has its own CRS (PDX), see PAD_LL.
   - id: PAD_LL
     name: London Paddington (Elizabeth line, low level)
     role: exit
+    tiplocs: [PADTLL]
     search: [PADDINGTON]
+    notes: CORPUS desc "PADDINGTON CROSSRAIL", CRS PDX
   - id: HXX
     name: Heathrow Terminals 2 & 3
     role: entry
@@ -69,7 +78,7 @@ nodes:
     notes: Heathrow branch entry; T4 (HAF) and T5 (HWV) are outside the graph
 
 main_line: [RDG, TWY, MAI, TAP, BNM, SLO, LNY, IVR, WDT, AIRPORT_JN, HAY, STL, HAN, WEA, EAL,
-            AML, OLD_OAK, LADBROKE_GROVE, PORTOBELLO_JN, WESTBOURNE_PARK, PAD]
+            AML, OLD_OAK, LADBROKE_GROVE, PORTOBELLO_JN, PAD]
 
 branches:
   heathrow: [HXX, AIRPORT_JN]

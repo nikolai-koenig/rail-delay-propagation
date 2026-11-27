@@ -67,7 +67,9 @@ The Open Rail Data wiki (wiki.openraildata.com) sits behind a browser check that
 ## SCHEDULE (CIF) and CORPUS
 
 - Both are available as RDM file products ("NWR Schedule", "NWR CORPUS"). They are also Network Rail downloads, but that portal is full (see above).
-- `rdp reference download-corpus` uses the Network Rail URL, so it is unusable for now. Download CORPUS from RDM's Data files tab and pass it with `rdp corridor resolve --corpus PATH`.
+- **Confirmed (2026-11-27):** RDM publishes CORPUS **weekly** as XML, named `NLCYYYYMMDD.xml.gz` (e.g. `NLC20261120.xml.gz`, released 21 Nov 2026). It has one `TSDBDataItem` per location with `NLC*` elements. The 2026-11-20 file has 12,114 locations; STANOX is missing for 940 and CRS is present for 3,583. There is no UIC field.
+- Save the files in `data/local/reference/`. `rdp corridor resolve` uses the newest `NLC*.xml*` there (or `--corpus PATH`) and records the file name and SHA-256 in `config/corridor_codes.json`.
+- `rdp reference download-corpus` uses the Network Rail URL, so it is unusable for now.
 - CIF contains engineering, pathing and performance allowances per location, which is the direct measure of timetable slack for RQ1.
 
 ## Context data
@@ -81,4 +83,5 @@ The Open Rail Data wiki (wiki.openraildata.com) sits behind a browser check that
 - [ ] FOI request to Network Rail for one year of TRUST/PSS movements on the corridor (would de-risk RQ2).
 - [ ] Ask CACI support about HSP limits for academic use.
 - [ ] Read the HSP product licence on RDM when subscribing.
-- [ ] Verify the CORPUS URL and the Network Rail STOMP port on first connection.
+- [ ] Verify the Network Rail STOMP port, if an account ever becomes available.
+- [ ] Check which corridor STANOX actually appear in TRUST (e.g. Airport Jn vs Stockley Jn, Old Oak Common East/West).
